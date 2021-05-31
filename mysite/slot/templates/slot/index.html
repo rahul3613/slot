@@ -1,0 +1,78 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<h2><font color="blue"><u>Covid Vaccination Slot Alert</u></font></h2>
+
+<h3> Already registered..<br>
+  Log in here: </h3>
+
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <p><label for="email">Email:</label>
+    <input type="email" name="email"></p>
+     <p><label for="pin">PinCode:</label>
+    <input type="text" name="pin"> </p>
+    <input type="submit" value="Send">
+</form>
+
+<br>
+
+
+<h3> New User..<br>
+    Register here: </h3>
+  
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <p><label for="dist">District:</label>
+        <select name="d_code">
+            {% for dt in dist %}
+                <option value={{dt.dist_code}}>{{dt.dist_name}}</option>
+            {% endfor %}
+        </select></p>
+
+    <p><label for="pin">PinCode:</label>
+    <input type="text" name="pin"></p>
+
+    <p><label for="email">Email:</label>
+    <input type="email" name="email"></p>
+    
+    <p><label for="notify">Keep next 10 notifications on:</label>
+    <input type="checkbox" name="condition" value = "notify" checked></p>
+
+    Notify me for:<br><br>
+    <label for="d1">Dose 1:</label>
+    <input type="checkbox" name="condition" value = "d1" checked>
+    <label for="d2">Dose 2:</label>
+    <input type="checkbox" name="condition"  value = "d2">
+
+    <p><label for="eight">Age 18+:</label>
+    <input type="checkbox" name="condition"  value = "eight" checked>
+    <label for="five">Age 45+:</label>
+    <input type="checkbox" name="condition"  value = "five"></p>
+
+    <p><label for="free">Free:</label>
+    <input type="checkbox" name="condition" value = "free" checked>
+    <label for="paid">Paid:</label>
+    <input type="checkbox" name="condition" value = "paid"></p>
+
+    <p><label for="cvsh">Covishield:</label>
+    <input type="checkbox" name="condition" value = "cvsh" checked></p>
+
+    <p><label for="covax">Covaxin:</label>
+    <input type="checkbox" name="condition" value = "covax" checked></p>
+
+    <p><label for="sptk">Sputnik V:</label>
+    <input type="checkbox" name="condition" value = "sptk" checked></p>
+
+    <input type="submit" value="Send">
+  </form>
+
+
+<br>
+
+<form action="{% url 'dist' %}" method="post">
+    {% csrf_token %}
+    <p><label for="dist">Couldn't find your district in the list add it here <br> we would update the list soon:</label>
+    <input type="text" name="dist"> </p>
+    <input type="submit" value="Send">
+</form>
+
+  Website developed and maintained by Rahul

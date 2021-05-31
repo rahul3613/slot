@@ -1,0 +1,60 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<h2><font color="blue"><u>Covid Vaccination Slot Alert</u></font></h2>
+<a href="{% url 'index' %}"><font color="orange"> Home Page</font></a>
+<h3> Hey..<br>
+  Here are your details: </h3>
+
+  <form action="{% url 'change' %}" method="post">
+    {% csrf_token %}
+
+    <p>District: {{ dist.dist_name }}</p>
+
+    <p>PinCode: {{ user.pin }}</p>
+
+    <p>Email: {{ user.email }}</p>
+
+    <input type="hidden" value="{{ user.email }}" name="email">
+    
+    <p><label for="notify">Keep next 10 notifications on:</label>
+    <input type="checkbox" name="condition" value = "notify" {% if user.notify %}
+    checked {% endif %}></p>
+
+    <p>Notify me for:<br><br>
+    <label for="d1">Dose 1:</label>
+    <input type="checkbox" name="condition" value = "d1" {% if user.d1 %}
+    checked {% endif %}>
+    <label for="d2">Dose 2:</label>
+    <input type="checkbox" name="condition"  value = "d2" {% if user.d2 %}
+    checked {% endif %}></p>
+
+    <p><label for="eight">Age 18+:</label>
+    <input type="checkbox" name="condition"  value = "eight" {% if user.eight %}
+    checked {% endif %}>
+    <label for="five">Age 45+:</label>
+    <input type="checkbox" name="condition"  value = "five" {% if user.five %}
+    checked {% endif %}></p>
+
+    <p><label for="free">Free:</label>
+    <input type="checkbox" name="condition" value = "free" {% if user.free %}
+    checked {% endif %}>
+    <label for="paid">Paid:</label>
+    <input type="checkbox" name="condition" value = "paid" {% if user.paid %}
+    checked {% endif %}></p>
+
+    <p><label for="cvsh">Covishield:</label>
+    <input type="checkbox" name="condition" value = "cvsh" {% if user.cvsh %}
+    checked {% endif %}></p>
+
+    <p><label for="covax">Covaxin:</label>
+    <input type="checkbox" name="condition" value = "covax" {% if user.covax %}
+    checked {% endif %}></p>
+
+    <p><label for="sptk">Sputnik V:</label>
+    <input type="checkbox" name="condition" value = "sptk" {% if user.sptk %}
+    checked {% endif %}></p>
+
+    <input type="submit" value="Send">
+  </form>
+
+  Website developed and maintained by Rahul

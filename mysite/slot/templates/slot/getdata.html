@@ -1,0 +1,28 @@
+{ {% for dt in dist %}"{{dt.dist_code }}": 
+        { {% for pins in dt.pin_set.all %}"{{pins.pin_code}}": 
+                { {% for user in pins.user_set.all %} 
+                    {% if user.notify %}
+                        "{{user.email}}": {"slot":{ {% for day in user.day_set.all %}"{{ day.day_numb }}":
+                                                            [{% for cent in day.cent_set.all %}{{ cent.cent_id }}{% if not forloop.last %},{% else %}
+                                                                                                                {% endif %}
+                                                            {% endfor %}]{% if not forloop.last %},{% else %}{% endif %}
+                                                    {% endfor %}},                   
+                                            "d1":"{{ user.d1 }}", 
+                                            "d2":"{{ user.d2 }}", 
+                                            "eight":"{{ user.eight }}", 
+                                            "five":"{{ user.five }}", 
+                                            "free":"{{ user.free }}", 
+                                            "paid":"{{ user.paid }}", 
+                                            "cvsh":"{{ user.cvsh }}", 
+                                            "covax":"{{ user.covax }}", 
+                                            "sptk":"{{ user.sptk }}"
+                                        }{% if not forloop.last %},{% else %}
+                                        {% endif %}
+                    {% endif %}
+                {% endfor %} 
+                }{% if not forloop.last %},{% else %}
+                    {% endif %}
+        {% endfor %} 
+        } {% if not forloop.last %},{% else %}
+          {% endif %}
+{% endfor %} }
